@@ -69,6 +69,7 @@ jobs:
       - name: Compile CV
         if: steps.check.outputs.changed == 'true'
         run: |
+          mkdir -p out
           tectonic -o out "resume/${RESUME_TEX}"
           cp "out/${RESUME_TEX%.tex}.pdf" cv.pdf
           ls -l cv.pdf
