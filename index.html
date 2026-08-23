@@ -50,9 +50,6 @@
         .section-content a:hover { text-decoration: underline; }
 
         /* Research */
-        .topic-section { margin-bottom: 30px; }
-        .topic-section:last-child { margin-bottom: 0; }
-        .topic-section h3 { font-size: 16px; font-weight: 600; color: #1e6bb8; margin-bottom: 15px; }
 
         .publication-item { margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid #f0f0f0; }
         .publication-item:last-child { border-bottom: none; }
@@ -135,9 +132,6 @@
         <div class="section">
             <h2>Research</h2>
 
-            <div class="topic-section">
-            <h3>Computer-use agents</h3>
-
             <div class="publication-item">
                 <div class="pub-title">Computer-Use CAPTCHA Agents: An Interactive Multimodal Benchmark and Training Environment</div>
                 <div class="pub-venue">Ongoing project</div><div class="pub-links"><a href="https://github.com/X0X0X00/CaptchaArena" aria-label="Project: Computer-Use CAPTCHA Agents">[Project]</a> <a href="https://huggingface.co/datasets/ZHEN-04/CaptchaArena" aria-label="Benchmark: CaptchaArena on Hugging Face">[Benchmark]</a></div>
@@ -148,8 +142,6 @@
                     <li>Trained a unified Qwen3.5-9B multimodal agent across all 20 task categories, constructing a 37K+ per-turn SFT corpus and experimenting with LoRA, full-parameter fine-tuning, frozen vision encoders, 32K contexts, and multi-task data scheduling.</li>
                     <li>Engineered large-scale multimodal SFT and GRPO training infrastructure with DeepSpeed ZeRO-3, Liger FLCE, distributed checkpointing, executable environment rewards, and custom memory optimizations for long-context training with a 248K-token vocabulary.</li>
                 </ul>
-            </div>
-
             <div class="publication-item">
                 <div class="pub-title">SeekJudge: A Practical Reward Framework for Reinforcement Learning in Computer-Use Agents</div>
                 <div class="pub-authors">Yang Wan, <strong>Zhenhao Zhang</strong>, Jierui Wang, Linchao Zhu</div>
@@ -162,11 +154,6 @@
                     <li>Contributed to the distillation and SFT training of SeekJudge-9B, analyzing failure modes in reasoning behavior, output formatting, and termination control, and iterating on training data and supervision strategies for the unified reward-model backbone.</li>
                 </ul>
             </div>
-
-            </div>
-
-            <div class="topic-section">
-            <h3>Agent memory</h3>
 
             <div class="publication-item">
                 <div class="pub-title">Mitigating Conversational Inertia in Multi-Turn Agents</div>
@@ -181,11 +168,6 @@
                 </ul>
             </div>
 
-            </div>
-
-            <div class="topic-section">
-            <h3>Computational social science</h3>
-
             <div class="publication-item">
                 <div class="pub-title">Political Symbols and Urban Amenities: The Spatial Logic of Flag Placement in Istanbul</div>
                 <div class="pub-authors">Cantay Çalışkan, Yi Ren, Yiheng Yao, <strong>Zhenhao Zhang</strong>, Qike Jiang, Yuewen Yan</div>
@@ -197,7 +179,6 @@
                     <li>Developed spatial distribution metrics for political-symbol visibility, applying Earth Mover's Distance (EMD) to quantify structural differences in visual-signal distributions across urban districts.</li>
                     <li>Conducted cross-region spatial analysis linking visual signals with urban geographic structure, translating large-scale image observations into interpretable district-level features for downstream statistical analysis.</li>
                 </ul>
-            </div>
             </div>
         </div>
 
