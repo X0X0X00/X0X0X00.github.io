@@ -1,91 +1,315 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Zhenhao Zhang</title>
-<style>
-  body { max-width: 720px; margin: 0 auto; padding: 3rem 1.5rem;
-         font: 16px/1.65 -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
-         color: #1a1a1a; }
-  h1 { font-size: 1.8rem; margin: 0 0 .3rem; letter-spacing: -.02em; }
-  .tag { color: #666; margin: 0 0 .6rem; }
-  .links a { color: #0645ad; text-decoration: none; margin-right: .9rem; }
-  .links a:hover { text-decoration: underline; }
-  h2 { font-size: 1.05rem; text-transform: uppercase; letter-spacing: .06em;
-       color: #444; border-bottom: 1px solid #e0e0e0; padding-bottom: .3rem;
-       margin: 2.4rem 0 1rem; }
-  .item { margin-bottom: 1.2rem; }
-  .item b { font-weight: 600; }
-  .meta { color: #777; font-size: .9rem; }
-  a { color: #0645ad; }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Zhenhao Zhang — M.S. student in Artificial Intelligence at Columbia University. Research on computer-use agents, multimodal learning, and reinforcement learning.">
+    <title>Zhenhao Zhang</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica', Arial, sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            color: #333;
+            background: #fff;
+        }
+
+        .container { max-width: 1000px; margin: 0 auto; padding: 30px 20px; }
+
+        .header { display: flex; gap: 30px; margin-bottom: 40px; align-items: flex-start; }
+
+        .profile-img {
+            width: 150px; height: 190px;
+            border-radius: 8px; object-fit: cover; object-position: 50% 20%;
+            flex-shrink: 0; background: #f0f0f0;
+        }
+
+        .header-info h1 { font-size: 26px; font-weight: 400; margin-bottom: 5px; }
+        .header-info .chinese { font-size: 18px; color: #666; margin-bottom: 10px; }
+        .header-info .position { font-size: 15px; color: #333; margin-bottom: 3px; }
+        .header-info .affiliation { font-size: 14px; color: #666; margin-bottom: 12px; }
+
+        .contact-info { font-size: 13px; line-height: 1.8; }
+        .contact-info a { color: #1e6bb8; text-decoration: none; }
+        .contact-info a:hover { text-decoration: underline; }
+
+        .section { margin-bottom: 35px; }
+        .section h2 {
+            font-size: 18px; font-weight: 600; margin-bottom: 15px; color: #000;
+            border-bottom: 1px solid #e0e0e0; padding-bottom: 5px;
+        }
+
+        .bio { font-size: 14px; line-height: 1.8; color: #333; }
+        .bio a { color: #1e6bb8; text-decoration: none; }
+        .bio a:hover { text-decoration: underline; }
+
+        .section-content { font-size: 13px; line-height: 1.8; color: #555; }
+        .section-content a { color: #1e6bb8; text-decoration: none; }
+        .section-content a:hover { text-decoration: underline; }
+
+        /* Papers */
+        .research-topics { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 25px; }
+        .topic-btn {
+            padding: 5px 12px; background: #f0f0f0; border: 1px solid #ddd; border-radius: 4px;
+            font-size: 13px; cursor: pointer; transition: all 0.2s; font-family: inherit; color: #333;
+        }
+        .topic-btn:hover, .topic-btn.active { background: #1e6bb8; color: white; border-color: #1e6bb8; }
+
+        .topic-section { margin-bottom: 30px; }
+        .topic-section h3 { font-size: 16px; font-weight: 600; color: #1e6bb8; margin-bottom: 15px; }
+
+        .publication-item { margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid #f0f0f0; }
+        .publication-item:last-child { border-bottom: none; }
+        .pub-title { font-size: 16px; font-weight: 500; color: #000; margin-bottom: 4px; line-height: 1.4; }
+        .pub-authors { font-size: 14px; color: #666; margin-bottom: 3px; }
+        .pub-authors strong { color: #333; }
+        .pub-venue { font-size: 14px; color: #767676; display: inline-block; }
+        .pub-links { display: inline-block; margin-left: 10px; }
+        .pub-links a { color: #1e6bb8; text-decoration: none; font-size: 12px; margin-right: 8px; }
+        .pub-links a:hover { text-decoration: underline; }
+
+        /* Research experience */
+        .exp-item { margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid #f0f0f0; }
+        .exp-item:last-child { border-bottom: none; }
+        .exp-title { font-size: 16px; font-weight: 500; color: #000; line-height: 1.4; }
+        .exp-title .role { font-weight: 400; color: #666; }
+        .exp-meta { font-size: 13px; color: #707070; margin: 3px 0 8px; line-height: 1.6; }
+        .exp-meta a { color: #1e6bb8; text-decoration: none; }
+        .exp-meta a:hover { text-decoration: underline; }
+        .exp-bullets { font-size: 13px; line-height: 1.8; color: #555; list-style: none; }
+        .exp-bullets li, .awards-list li { margin-bottom: 6px; padding-left: 15px; position: relative; }
+        .exp-bullets li::before, .awards-list li::before { content: "▸"; position: absolute; left: 0; color: #1e6bb8; }
+
+        /* Education */
+        .edu-item { margin-bottom: 14px; font-size: 14px; }
+        .edu-item .school { font-weight: 500; color: #000; }
+        .edu-item .degree { color: #333; }
+        .edu-item .meta { font-size: 13px; color: #707070; }
+
+        /* Awards */
+        .awards-list { font-size: 13px; list-style: none; }
+
+        .footer { font-size: 12px; color: #767676; margin-top: 40px; padding-top: 15px; border-top: 1px solid #f0f0f0; }
+
+        @media (max-width: 768px) {
+            .header { flex-direction: column; align-items: center; text-align: center; }
+        }
+    </style>
 </head>
 <body>
+    <div class="container">
+        <div class="header">
+            <img src="images/photo.jpg" alt="Portrait of Zhenhao Zhang" class="profile-img" onerror="this.style.display='none'">
+            <div class="header-info">
+                <h1>Zhenhao Zhang</h1>
+                <div class="chinese" lang="zh-Hans">张臻昊</div>
+                <div class="position">M.S. Student in Artificial Intelligence</div>
+                <div class="affiliation">Columbia University</div>
+                <div class="contact-info">
+                    Email: <a href="mailto:zz3530@columbia.edu">zz3530@columbia.edu</a><br>
+                    <a href="cv.pdf">CV</a> |
+                    <a href="https://github.com/X0X0X00">GitHub</a> |
+                    <a href="https://www.linkedin.com/in/zhenhao-zhang-uofr/">LinkedIn</a>
+                </div>
+            </div>
+        </div>
 
-<h1>Zhenhao Zhang</h1>
-<p class="tag">M.S. in Artificial Intelligence, Columbia University</p>
-<p class="links">
-  <a href="cv.pdf">CV</a>
-  <a href="mailto:zz3530@columbia.edu">Email</a>
-  <a href="https://github.com/X0X0X00">GitHub</a>
-  <a href="https://www.linkedin.com/in/zhenhao-zhang-uofr/">LinkedIn</a>
-</p>
+        <div class="section">
+            <h2>About</h2>
+            <div class="bio">
+                I am an M.S. student in Artificial Intelligence at Columbia University (concentration: AI and Advanced Computing).
+                I received my B.S. in Computer Science and B.S. in Business (Information Systems) from the University of Rochester in 2025,
+                graduating cum laude with Highest Distinction in Computer Science.
+                Since 2025 I have been working with <a href="https://ffmpbgrnn.github.io/">Dr. Linchao Zhu</a> at the College of Computer Science and Technology,
+                Zhejiang University — first on agent memory, and since 2026 on computer-use agents.
 
-<p>I work on computer-use agents — building interactive environments,
-training multimodal agents with SFT and RL, and designing reward models
-for long-horizon agent evaluation.</p>
+                <p style="margin-top: 10px;">
+                My research focuses on AI agents that act in interactive environments. I build multimodal benchmarks and training environments
+                for computer-use agents with executable, browser-verified rewards; train unified vision-language agents with SFT and
+                reinforcement learning (GRPO); design reward models for long-horizon agent evaluation; and study memory and context management
+                in multi-turn LLM agents. I am broadly interested in AI agents, multimodal learning, and reinforcement learning.
+                </p>
+            </div>
+        </div>
 
-<h2>Publications</h2>
-<div class="item">
-  <b><a href="https://arxiv.org/abs/2602.03664">Mitigating Conversational Inertia in Multi-Turn Agents</a></b><br>
-  <span class="meta">ICML 2026</span>
-</div>
-<div class="item">
-  <b><a href="https://arxiv.org/abs/2607.23263">SeekJudge: A Practical Reward Framework for Reinforcement Learning
-  in Computer-Use Agents</a></b><br>
-  <span class="meta">arXiv, 2026</span>
-</div>
-<div class="item">
-  <b><a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6727981">Political Symbols and Urban Amenities: The Spatial Logic of Flag
-  Placement in Istanbul</a></b><br>
-  <span class="meta">SSRN, 2026</span>
-</div>
+        <div class="section">
+            <h2>Selected Papers</h2>
 
-<h2>Research</h2>
-<div class="item">
-  <b>Computer-Use CAPTCHA Agents</b> — Lead Researcher<br>
-  <span class="meta">Zhejiang University, 2026–present</span><br>
-  Interactive multimodal benchmark and training environment (50K instances,
-  20 task categories) with browser-verified executable rewards; 46K-trajectory
-  distillation pipeline; unified Qwen3.5-9B agent trained with SFT and GRPO
-  on DeepSpeed ZeRO-3.
-</div>
-<div class="item">
-  <b>SeekJudge — Reward Modeling for Computer-Use Agents</b><br>
-  <span class="meta">2026</span><br>
-  300+ manually annotated long-horizon trajectories across web, desktop, and
-  mobile, with step-level supervision; fine-grained reward criteria and
-  model-vs-human disagreement analysis motivating learned reward models.
-</div>
-<div class="item">
-  <b>Agent Memory / Conversational Inertia</b><br>
-  <span class="meta">2025–2026</span><br>
-  Trajectory summarization across AgentGym environments; attention diagnostics
-  linking system-token ratio to task success.
-</div>
+            <div class="research-topics" role="group" aria-label="Filter papers by topic">
+                <button class="topic-btn active" aria-pressed="true" onclick="showTopic('all', this)">All</button>
+                <button class="topic-btn" aria-pressed="false" onclick="showTopic('cua', this)">Computer-use agents</button>
+                <button class="topic-btn" aria-pressed="false" onclick="showTopic('memory', this)">Agent memory</button>
+                <button class="topic-btn" aria-pressed="false" onclick="showTopic('geo', this)">Computational social science</button>
+            </div>
 
-<h2>Education</h2>
-<div class="item">
-  <b>Columbia University</b> — M.S. in Artificial Intelligence;
-  Concentration: AI and Advanced Computing<br>
-  <span class="meta">2026–2028</span>
-</div>
-<div class="item">
-  <b>University of Rochester</b> — B.S. Computer Science;
-  B.S. Business: Information Systems<br>
-  <span class="meta">2022–2025 · GPA 3.85 · Highest Distinction in CS</span>
-</div>
+            <div id="publications-container"><noscript>Enable JavaScript to view the paper list, or see the <a href="cv.pdf">CV</a>.</noscript></div>
+        </div>
 
+        <div class="section">
+            <h2>Research Experience</h2>
+
+            <div class="exp-item">
+                <div class="exp-title">Computer-Use CAPTCHA Agents <span class="role">— Lead Researcher</span></div>
+                <div class="exp-meta">
+                    Zhejiang University, College of Computer Science and Technology · Advisor: <a href="https://ffmpbgrnn.github.io/">Dr. Linchao Zhu</a> · Jan 2026 – Present
+                </div>
+                <ul class="exp-bullets">
+                    <li>Led a research team in developing an interactive multimodal benchmark and training environment for computer-use agents, covering 50K CAPTCHA instances across 20 task categories and 5 interaction patterns, with low-level mouse/keyboard actions and executable, browser-verified ground truth.</li>
+                    <li>Designed an answer-conditioned reasoning distillation pipeline for 46K multi-turn trajectories, integrating per-step chain-of-thought supervision, symbol-to-pixel grounding, persistent PLAN/STATE memory, and independent VLM-based quality filtering.</li>
+                    <li>Trained a unified Qwen3.5-9B multimodal agent across all 20 task categories, constructing a 37K+ per-turn SFT corpus and experimenting with LoRA, full-parameter fine-tuning, frozen vision encoders, 32K contexts, and multi-task data scheduling.</li>
+                    <li>Engineered large-scale multimodal SFT and GRPO training infrastructure with DeepSpeed ZeRO-3, Liger FLCE, distributed checkpointing, executable environment rewards, and custom memory optimizations for long-context training with a 248K-token vocabulary.</li>
+                </ul>
+            </div>
+
+            <div class="exp-item">
+                <div class="exp-title">SeekJudge: Reward Modeling for Computer-Use Agents <span class="role">— Research Assistant</span></div>
+                <div class="exp-meta">
+                    Zhejiang University, College of Computer Science and Technology · Advisor: <a href="https://ffmpbgrnn.github.io/">Dr. Linchao Zhu</a> · Jan 2026 – Aug 2026<br>
+                    Paper: <a href="https://arxiv.org/abs/2607.23263">SeekJudge: A Practical Reward Framework for Reinforcement Learning in Computer-Use Agents</a> (arXiv 2026)
+                </div>
+                <ul class="exp-bullets">
+                    <li>Built and manually annotated a 300+ trajectory cross-platform benchmark for long-horizon computer-use agents, providing trajectory-level verdicts and dense step-level supervision across web, desktop, and mobile environments.</li>
+                    <li>Designed fine-grained reward annotation criteria and quality-control workflows covering milestones, correct decisions, error correction, off-path behavior, and harmful actions, and analyzed model–human agreement at the step level.</li>
+                    <li>Conducted human evaluation and systematic error analysis of rule-based and model-based reward signals, identifying rule–human disagreement across multiple CUA environments and motivating learned reward models for long-horizon agent evaluation.</li>
+                    <li>Contributed to the distillation and SFT training of SeekJudge-9B, analyzing failure modes in reasoning behavior, output formatting, and termination control, and iterating on training data and supervision strategies for the unified reward-model backbone.</li>
+                </ul>
+            </div>
+
+            <div class="exp-item">
+                <div class="exp-title">Agent Memory and Conversational Inertia in Multi-Turn Agents <span class="role">— Research Assistant</span></div>
+                <div class="exp-meta">
+                    Zhejiang University, College of Computer Science and Technology · Advisor: <a href="https://ffmpbgrnn.github.io/">Dr. Linchao Zhu</a> · Feb 2025 – Aug 2026<br>
+                    Paper: <a href="https://arxiv.org/abs/2602.03664">Mitigating Conversational Inertia in Multi-Turn Agents</a> (ICML 2026)
+                </div>
+                <ul class="exp-bullets">
+                    <li>Implemented task-specific trajectory summarization for long-horizon LLM agents across Maze, WebShop, Wordle, SciWorld, and TextCraft, compressing multi-turn observation–action histories into compact memory while preserving task-critical state and progress.</li>
+                    <li>Designed and optimized environment-aware memory representations and summarization prompts, selectively retaining navigation states, completed subgoals, constraints, previous actions, and unresolved information for downstream decision-making.</li>
+                    <li>Benchmarked summarization against alternative context-management strategies across heterogeneous AgentGym environments, analyzing the trade-off between history retention and conversational inertia; training-free summary prompts improved Maze success from 85.5% to 90.0%.</li>
+                    <li>Conducted failure and behavioral analysis of long-context agents, building attention diagnostics that link system-token ratio → system attention → task success, and studying action repetition, exploration, and error propagation.</li>
+                </ul>
+            </div>
+
+            <div class="exp-item">
+                <div class="exp-title">Political Symbols and Urban Amenities: Geospatial Visual Analysis of Istanbul <span class="role">— Undergraduate Research Assistant</span></div>
+                <div class="exp-meta">
+                    University of Rochester, Goergen Institute for Data Science and Artificial Intelligence (DSCC 279 Independent Research) · Advisor: Prof. Cantay Çalışkan · Aug 2025 – Jan 2026<br>
+                    Paper: <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6727981">Political Symbols and Urban Amenities: The Spatial Logic of Flag Placement in Istanbul</a> (SSRN 2026)
+                </div>
+                <ul class="exp-bullets">
+                    <li>Built a large-scale geospatial data pipeline over ~748K Google Street View panoramas — image cleaning, coordinate alignment, spatial matching, and regional aggregation — to construct an analysis-ready urban visual dataset.</li>
+                    <li>Designed a multi-scale spatial feature extraction framework using nested geographic buffers and distance-weighted aggregation to transform panorama-level visual signals into constituency-level statistical representations.</li>
+                    <li>Developed spatial distribution metrics for political-symbol visibility, applying Earth Mover's Distance (EMD) to quantify structural differences in visual-signal distributions across urban districts.</li>
+                    <li>Conducted cross-region spatial analysis linking visual signals with urban geographic structure, translating large-scale image observations into interpretable district-level features for downstream statistical analysis.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Education</h2>
+            <div class="edu-item">
+                <div class="school">Columbia University</div>
+                <div class="degree">M.S. in Artificial Intelligence · Concentration: AI and Advanced Computing</div>
+                <div class="meta">Aug 2026 – Dec 2028 (expected) · New York, NY</div>
+            </div>
+            <div class="edu-item">
+                <div class="school">University of Rochester</div>
+                <div class="degree">B.S. in Computer Science · B.S. in Business: Information Systems</div>
+                <div class="meta">Aug 2022 – Dec 2025 · GPA 3.85/4.00 · Cum Laude · Highest Distinction in Computer Science · Dean's List (2023–2025)</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Awards &amp; Competitions</h2>
+            <div class="section-content">
+                <ul class="awards-list">
+                    <li>3rd Place (of 30 teams) — GIDS Biomedical Data Science Hackathon, MERFISH Cell-Type Classification, University of Rochester, 2026</li>
+                    <li>GIDS Biomedical Data Science Hackathon — Perturb-seq Gene Expression Prediction, 2025</li>
+                    <li>GIDS Biomedical Data Science Hackathon — Single-Cell Multiome Modeling, 2024</li>
+                    <li>Second Best Overall Award — Finnov8 Hackathon, 2024</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Teaching</h2>
+            <div class="section-content">
+                <p><strong>Undergraduate Teaching Assistant</strong>, CSC 280: Computer Models and Limitations — Department of Computer Science, University of Rochester, Fall 2025</p>
+            </div>
+        </div>
+
+        <div class="footer">Last updated: August 2026</div>
+    </div>
+
+    <script>
+        // Publication data — add/remove entries here.
+        const publicationsData = {
+            cua: [
+                {
+                    title: "SeekJudge: A Practical Reward Framework for Reinforcement Learning in Computer-Use Agents",
+                    authors: "Yang Wan, <strong>Zhenhao Zhang</strong>, Jierui Wang, Linchao Zhu",
+                    venue: "arXiv 2026",
+                    links: [ { text: "Paper", url: "https://arxiv.org/abs/2607.23263" } ]
+                }
+            ],
+            memory: [
+                {
+                    title: "Mitigating Conversational Inertia in Multi-Turn Agents",
+                    authors: "Yang Wan, Zheng Cao, <strong>Zhenhao Zhang</strong>, Zhengwen Zeng, Shuheng Shen, Changhua Meng, Linchao Zhu",
+                    venue: "ICML 2026",
+                    links: [ { text: "Paper", url: "https://arxiv.org/abs/2602.03664" } ]
+                }
+            ],
+            geo: [
+                {
+                    title: "Political Symbols and Urban Amenities: The Spatial Logic of Flag Placement in Istanbul",
+                    authors: "Cantay Çalışkan, Yi Ren, Yiheng Yao, <strong>Zhenhao Zhang</strong>, Qike Jiang, Yuewen Yan",
+                    venue: "SSRN 2026",
+                    links: [ { text: "Paper", url: "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6727981" } ]
+                }
+            ]
+        };
+
+        const categoryTitles = {
+            cua: "Computer-use agents",
+            memory: "Agent memory",
+            geo: "Computational social science"
+        };
+
+        function generatePublicationHTML(pub) {
+            const links = (pub.links || []).map(l => `<a href="${l.url}" aria-label="${l.text}: ${pub.title}">[${l.text}]</a>`).join(' ');
+            return `
+                <div class="publication-item">
+                    <div class="pub-title">${pub.title}</div>
+                    <div class="pub-authors">${pub.authors}</div>
+                    <div class="pub-venue">${pub.venue}</div>
+                    ${links ? `<div class="pub-links">${links}</div>` : ''}
+                </div>`;
+        }
+
+        function renderPublications(filter) {
+            let html = '';
+            for (const [category, papers] of Object.entries(publicationsData)) {
+                if (filter === 'all' || filter === category) {
+                    html += `
+                        <div class="topic-section" data-topic="${category}">
+                            <h3>${categoryTitles[category]}</h3>
+                            ${papers.map(generatePublicationHTML).join('')}
+                        </div>`;
+                }
+            }
+            document.getElementById('publications-container').innerHTML = html;
+        }
+
+        function showTopic(topic, btn) {
+            document.querySelectorAll('.topic-btn').forEach(b => { b.classList.remove('active'); b.setAttribute('aria-pressed', 'false'); });
+            btn.classList.add('active');
+            btn.setAttribute('aria-pressed', 'true');
+            renderPublications(topic);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => renderPublications('all'));
+    </script>
 </body>
 </html>
