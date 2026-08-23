@@ -1,0 +1,103 @@
+# Builds cv.pdf from the LaTeX source in X0X0X00/Resume and deploys the site to GitHub Pages.
+#
+# Triggers:
+#   - push to main            (site content changed)
+#   - hourly schedule         (picks up Overleaf -> GitHub pushes in X0X0X00/Resume; skips if nothing changed)
+#   - manual "Run workflow"   (or: gh workflow run deploy.yml)
+#
+# cv.pdf committed in this repo is only a fallback; the deployed one is always rebuilt from the resume repo.
+name: Deploy site
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: '23 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+env:
+  RESUME_REPO: X0X0X00/Resume
+  RESUME_TEX: Zhenhao_cv_EN.tex
+  TECTONIC_VERSION: 0.17.0
+  SITE_URL: https://x0x0x00.github.io
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    outputs:
+      changed: ${{ steps.check.outputs.changed }}
+    steps:
+      - name: Check out site
+        uses: actions/checkout@v4
+
+      - name: Check out resume source
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ env.RESUME_REPO }}
+          path: resume
+
+      - name: Skip scheduled run if the resume has not changed
+        id: check
+        run: |
+          sha=$(git -C resume rev-parse HEAD)
+          live=$(curl -fsSL "$SITE_URL/cv.sha" || echo none)
+          echo "resume HEAD: $sha  /  deployed: $live"
+          if [ "${{ github.event_name }}" = "schedule" ] && [ "$sha" = "$live" ]; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "Resume unchanged — nothing to deploy."
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+          echo "$sha" > cv.sha
+
+      - name: Install tectonic
+        if: steps.check.outputs.changed == 'true'
+        run: |
+          curl -fsSL "https://github.com/tectonic-typesetting/tectonic/releases/download/tectonic%40${TECTONIC_VERSION}/tectonic-${TECTONIC_VERSION}-x86_64-unknown-linux-musl.tar.gz" | tar xz
+          sudo mv tectonic /usr/local/bin/tectonic
+          tectonic --version
+
+      - name: Compile CV
+        if: steps.check.outputs.changed == 'true'
+        run: |
+          tectonic -o out "resume/${RESUME_TEX}"
+          cp "out/${RESUME_TEX%.tex}.pdf" cv.pdf
+          ls -l cv.pdf
+
+      - name: Assemble site
+        if: steps.check.outputs.changed == 'true'
+        run: |
+          mkdir -p _site
+          rsync -a --exclude '.git' --exclude '.github' --exclude 'resume' --exclude 'out' --exclude '_site' ./ _site/
+          ls -la _site
+
+      - name: Configure Pages
+        if: steps.check.outputs.changed == 'true'
+        uses: actions/configure-pages@v5
+
+      - name: Upload site artifact
+        if: steps.check.outputs.changed == 'true'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    if: needs.build.outputs.changed == 'true'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
