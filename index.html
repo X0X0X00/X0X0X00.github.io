@@ -49,16 +49,11 @@
         .section-content a { color: #1e6bb8; text-decoration: none; }
         .section-content a:hover { text-decoration: underline; }
 
-        /* Papers */
-        .research-topics { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 25px; }
-        .topic-btn {
+        /* Research */
             padding: 5px 12px; background: #f0f0f0; border: 1px solid #ddd; border-radius: 4px;
             font-size: 13px; cursor: pointer; transition: all 0.2s; font-family: inherit; color: #333;
         }
-        .topic-btn:hover, .topic-btn.active { background: #1e6bb8; color: white; border-color: #1e6bb8; }
 
-        .topic-section { margin-bottom: 30px; }
-        .topic-section h3 { font-size: 16px; font-weight: 600; color: #1e6bb8; margin-bottom: 15px; }
 
         .publication-item { margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid #f0f0f0; }
         .publication-item:last-child { border-bottom: none; }
@@ -70,12 +65,7 @@
         .pub-links a { color: #1e6bb8; text-decoration: none; font-size: 12px; margin-right: 8px; }
         .pub-links a:hover { text-decoration: underline; }
 
-        /* Research experience */
-        .exp-item { margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid #f0f0f0; }
-        .exp-item:last-child { border-bottom: none; }
-        .exp-title { font-size: 16px; font-weight: 500; color: #000; line-height: 1.4; }
-        .exp-title .role { font-weight: 400; color: #666; }
-        .exp-meta { font-size: 13px; color: #707070; margin: 3px 0 8px; line-height: 1.6; }
+        .exp-meta { font-size: 13px; color: #707070; margin: 6px 0 8px; line-height: 1.6; }
         .exp-meta a { color: #1e6bb8; text-decoration: none; }
         .exp-meta a:hover { text-decoration: underline; }
         .exp-bullets { font-size: 13px; line-height: 1.8; color: #555; list-style: none; }
@@ -135,26 +125,12 @@
         </div>
 
         <div class="section">
-            <h2>Selected Papers</h2>
+            <h2>Research</h2>
 
-            <div class="research-topics" role="group" aria-label="Filter papers by topic">
-                <button class="topic-btn active" aria-pressed="true" onclick="showTopic('all', this)">All</button>
-                <button class="topic-btn" aria-pressed="false" onclick="showTopic('cua', this)">Computer-use agents</button>
-                <button class="topic-btn" aria-pressed="false" onclick="showTopic('memory', this)">Agent memory</button>
-                <button class="topic-btn" aria-pressed="false" onclick="showTopic('geo', this)">Computational social science</button>
-            </div>
-
-            <div id="publications-container"><noscript>Enable JavaScript to view the paper list, or see the <a href="cv.pdf">CV</a>.</noscript></div>
-        </div>
-
-        <div class="section">
-            <h2>Research Experience</h2>
-
-            <div class="exp-item">
-                <div class="exp-title">Computer-Use CAPTCHA Agents <span class="role">— Lead Researcher</span></div>
-                <div class="exp-meta">
-                    Zhejiang University, College of Computer Science and Technology · Advisor: <a href="https://ffmpbgrnn.github.io/">Dr. Linchao Zhu</a> · Jan 2026 – Present
-                </div>
+            <div class="publication-item">
+                <div class="pub-title">Computer-Use CAPTCHA Agents: An Interactive Multimodal Benchmark and Training Environment</div>
+                <div class="pub-venue">Ongoing project, 2026 – present</div>
+                <div class="exp-meta">Lead Researcher · Zhejiang University, College of Computer Science and Technology · Advisor: <a href="https://ffmpbgrnn.github.io/">Dr. Linchao Zhu</a> · Jan 2026 – Present</div>
                 <ul class="exp-bullets">
                     <li>Led a research team in developing an interactive multimodal benchmark and training environment for computer-use agents, covering 50K CAPTCHA instances across 20 task categories and 5 interaction patterns, with low-level mouse/keyboard actions and executable, browser-verified ground truth.</li>
                     <li>Designed an answer-conditioned reasoning distillation pipeline for 46K multi-turn trajectories, integrating per-step chain-of-thought supervision, symbol-to-pixel grounding, persistent PLAN/STATE memory, and independent VLM-based quality filtering.</li>
@@ -163,12 +139,11 @@
                 </ul>
             </div>
 
-            <div class="exp-item">
-                <div class="exp-title">SeekJudge: Reward Modeling for Computer-Use Agents <span class="role">— Research Assistant</span></div>
-                <div class="exp-meta">
-                    Zhejiang University, College of Computer Science and Technology · Advisor: <a href="https://ffmpbgrnn.github.io/">Dr. Linchao Zhu</a> · Jan 2026 – Aug 2026<br>
-                    Paper: <a href="https://arxiv.org/abs/2607.23263">SeekJudge: A Practical Reward Framework for Reinforcement Learning in Computer-Use Agents</a> (arXiv 2026)
-                </div>
+            <div class="publication-item">
+                <div class="pub-title">SeekJudge: A Practical Reward Framework for Reinforcement Learning in Computer-Use Agents</div>
+                <div class="pub-authors">Yang Wan, <strong>Zhenhao Zhang</strong>, Jierui Wang, Linchao Zhu</div>
+                <div class="pub-venue">arXiv 2026</div><div class="pub-links"><a href="https://arxiv.org/abs/2607.23263" aria-label="Paper: SeekJudge: A Practical Reward Framework for Reinforcement Learning in Computer-Use Agents">[Paper]</a></div>
+                <div class="exp-meta">Research Assistant · Zhejiang University, College of Computer Science and Technology · Advisor: <a href="https://ffmpbgrnn.github.io/">Dr. Linchao Zhu</a> · Jan 2026 – Aug 2026</div>
                 <ul class="exp-bullets">
                     <li>Built and manually annotated a 300+ trajectory cross-platform benchmark for long-horizon computer-use agents, providing trajectory-level verdicts and dense step-level supervision across web, desktop, and mobile environments.</li>
                     <li>Designed fine-grained reward annotation criteria and quality-control workflows covering milestones, correct decisions, error correction, off-path behavior, and harmful actions, and analyzed model–human agreement at the step level.</li>
@@ -177,12 +152,11 @@
                 </ul>
             </div>
 
-            <div class="exp-item">
-                <div class="exp-title">Agent Memory and Conversational Inertia in Multi-Turn Agents <span class="role">— Research Assistant</span></div>
-                <div class="exp-meta">
-                    Zhejiang University, College of Computer Science and Technology · Advisor: <a href="https://ffmpbgrnn.github.io/">Dr. Linchao Zhu</a> · Feb 2025 – Aug 2026<br>
-                    Paper: <a href="https://arxiv.org/abs/2602.03664">Mitigating Conversational Inertia in Multi-Turn Agents</a> (ICML 2026)
-                </div>
+            <div class="publication-item">
+                <div class="pub-title">Mitigating Conversational Inertia in Multi-Turn Agents</div>
+                <div class="pub-authors">Yang Wan, Zheng Cao, <strong>Zhenhao Zhang</strong>, Zhengwen Zeng, Shuheng Shen, Changhua Meng, Linchao Zhu</div>
+                <div class="pub-venue">ICML 2026</div><div class="pub-links"><a href="https://arxiv.org/abs/2602.03664" aria-label="Paper: Mitigating Conversational Inertia in Multi-Turn Agents">[Paper]</a></div>
+                <div class="exp-meta">Research Assistant · Zhejiang University, College of Computer Science and Technology · Advisor: <a href="https://ffmpbgrnn.github.io/">Dr. Linchao Zhu</a> · Feb 2025 – Aug 2026</div>
                 <ul class="exp-bullets">
                     <li>Implemented task-specific trajectory summarization for long-horizon LLM agents across Maze, WebShop, Wordle, SciWorld, and TextCraft, compressing multi-turn observation–action histories into compact memory while preserving task-critical state and progress.</li>
                     <li>Designed and optimized environment-aware memory representations and summarization prompts, selectively retaining navigation states, completed subgoals, constraints, previous actions, and unresolved information for downstream decision-making.</li>
@@ -191,12 +165,11 @@
                 </ul>
             </div>
 
-            <div class="exp-item">
-                <div class="exp-title">Political Symbols and Urban Amenities: Geospatial Visual Analysis of Istanbul <span class="role">— Undergraduate Research Assistant</span></div>
-                <div class="exp-meta">
-                    University of Rochester, Goergen Institute for Data Science and Artificial Intelligence (DSCC 279 Independent Research) · Advisor: Prof. Cantay Çalışkan · Aug 2025 – Jan 2026<br>
-                    Paper: <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6727981">Political Symbols and Urban Amenities: The Spatial Logic of Flag Placement in Istanbul</a> (SSRN 2026)
-                </div>
+            <div class="publication-item">
+                <div class="pub-title">Political Symbols and Urban Amenities: The Spatial Logic of Flag Placement in Istanbul</div>
+                <div class="pub-authors">Cantay Çalışkan, Yi Ren, Yiheng Yao, <strong>Zhenhao Zhang</strong>, Qike Jiang, Yuewen Yan</div>
+                <div class="pub-venue">SSRN 2026</div><div class="pub-links"><a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6727981" aria-label="Paper: Political Symbols and Urban Amenities: The Spatial Logic of Flag Placement in Istanbul">[Paper]</a></div>
+                <div class="exp-meta">Undergraduate Research Assistant · University of Rochester, Goergen Institute for Data Science and Artificial Intelligence (DSCC 279 Independent Research) · Advisor: Prof. Cantay Çalışkan · Aug 2025 – Jan 2026</div>
                 <ul class="exp-bullets">
                     <li>Built a large-scale geospatial data pipeline over ~748K Google Street View panoramas — image cleaning, coordinate alignment, spatial matching, and regional aggregation — to construct an analysis-ready urban visual dataset.</li>
                     <li>Designed a multi-scale spatial feature extraction framework using nested geographic buffers and distance-weighted aggregation to transform panorama-level visual signals into constituency-level statistical representations.</li>
@@ -242,74 +215,5 @@
         <div class="footer">Last updated: August 2026</div>
     </div>
 
-    <script>
-        // Publication data — add/remove entries here.
-        const publicationsData = {
-            cua: [
-                {
-                    title: "SeekJudge: A Practical Reward Framework for Reinforcement Learning in Computer-Use Agents",
-                    authors: "Yang Wan, <strong>Zhenhao Zhang</strong>, Jierui Wang, Linchao Zhu",
-                    venue: "arXiv 2026",
-                    links: [ { text: "Paper", url: "https://arxiv.org/abs/2607.23263" } ]
-                }
-            ],
-            memory: [
-                {
-                    title: "Mitigating Conversational Inertia in Multi-Turn Agents",
-                    authors: "Yang Wan, Zheng Cao, <strong>Zhenhao Zhang</strong>, Zhengwen Zeng, Shuheng Shen, Changhua Meng, Linchao Zhu",
-                    venue: "ICML 2026",
-                    links: [ { text: "Paper", url: "https://arxiv.org/abs/2602.03664" } ]
-                }
-            ],
-            geo: [
-                {
-                    title: "Political Symbols and Urban Amenities: The Spatial Logic of Flag Placement in Istanbul",
-                    authors: "Cantay Çalışkan, Yi Ren, Yiheng Yao, <strong>Zhenhao Zhang</strong>, Qike Jiang, Yuewen Yan",
-                    venue: "SSRN 2026",
-                    links: [ { text: "Paper", url: "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6727981" } ]
-                }
-            ]
-        };
-
-        const categoryTitles = {
-            cua: "Computer-use agents",
-            memory: "Agent memory",
-            geo: "Computational social science"
-        };
-
-        function generatePublicationHTML(pub) {
-            const links = (pub.links || []).map(l => `<a href="${l.url}" aria-label="${l.text}: ${pub.title}">[${l.text}]</a>`).join(' ');
-            return `
-                <div class="publication-item">
-                    <div class="pub-title">${pub.title}</div>
-                    <div class="pub-authors">${pub.authors}</div>
-                    <div class="pub-venue">${pub.venue}</div>
-                    ${links ? `<div class="pub-links">${links}</div>` : ''}
-                </div>`;
-        }
-
-        function renderPublications(filter) {
-            let html = '';
-            for (const [category, papers] of Object.entries(publicationsData)) {
-                if (filter === 'all' || filter === category) {
-                    html += `
-                        <div class="topic-section" data-topic="${category}">
-                            <h3>${categoryTitles[category]}</h3>
-                            ${papers.map(generatePublicationHTML).join('')}
-                        </div>`;
-                }
-            }
-            document.getElementById('publications-container').innerHTML = html;
-        }
-
-        function showTopic(topic, btn) {
-            document.querySelectorAll('.topic-btn').forEach(b => { b.classList.remove('active'); b.setAttribute('aria-pressed', 'false'); });
-            btn.classList.add('active');
-            btn.setAttribute('aria-pressed', 'true');
-            renderPublications(topic);
-        }
-
-        document.addEventListener('DOMContentLoaded', () => renderPublications('all'));
-    </script>
 </body>
 </html>
