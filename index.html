@@ -65,8 +65,13 @@
         .exp-meta a { color: #1e6bb8; text-decoration: none; }
         .exp-meta a:hover { text-decoration: underline; }
         .exp-bullets { font-size: 13px; line-height: 1.8; color: #555; list-style: none; }
-        .exp-bullets li, .awards-list li { margin-bottom: 6px; padding-left: 15px; position: relative; }
-        .exp-bullets li::before, .awards-list li::before { content: "▸"; position: absolute; left: 0; color: #1e6bb8; }
+        .exp-bullets li { margin-bottom: 6px; padding-left: 15px; position: relative; }
+        .exp-bullets li::before { content: "▸"; position: absolute; left: 0; color: #1e6bb8; }
+
+        /* Projects & awards */
+        .proj-item { margin-bottom: 16px; }
+        .proj-title { font-size: 15px; font-weight: 500; color: #000; line-height: 1.4; }
+        .proj-title .role { font-weight: 400; color: #666; }
 
         /* Education */
         .edu-item { margin-bottom: 14px; font-size: 14px; }
@@ -75,7 +80,6 @@
         .edu-item .meta { font-size: 13px; color: #707070; }
 
         /* Awards */
-        .awards-list { font-size: 13px; list-style: none; }
 
         .footer { font-size: 12px; color: #767676; margin-top: 40px; padding-top: 15px; border-top: 1px solid #f0f0f0; }
 
@@ -191,13 +195,34 @@
         </div>
 
         <div class="section">
-            <h2>Awards &amp; Competitions</h2>
-            <div class="section-content">
-                <ul class="awards-list">
-                    <li>3rd Place (of 30 teams) — GIDS Biomedical Data Science Hackathon, MERFISH Cell-Type Classification, University of Rochester, 2026</li>
-                    <li>GIDS Biomedical Data Science Hackathon — Perturb-seq Gene Expression Prediction, 2025</li>
-                    <li>GIDS Biomedical Data Science Hackathon — Single-Cell Multiome Modeling, 2024</li>
-                    <li>Second Best Overall Award — Finnov8 Hackathon, 2024</li>
+            <h2>Selected Projects &amp; Awards</h2>
+
+            <div class="proj-item">
+                <div class="proj-title">GIDS Biomedical Data Science Hackathon <span class="role">— Prize Winner</span></div>
+                <div class="exp-meta">University of Rochester · Aug 2026</div>
+                <ul class="exp-bullets">
+                    <li><em>MERFISH cell-type classification:</em> led the modeling pipeline for 60-class cell-type prediction on mouse spinal-cord data (200 genes, 5K labelled cells): seed-bagged LightGBM ensembles over expression, PCA, and spatial/expression-neighbour label features with biological constraint masks and a leakage-free CV protocol; placed <strong>3rd of 30 teams</strong> with 80.7% accuracy (majority-class baseline 14%).</li>
+                </ul>
+            </div>
+            <div class="proj-item">
+                <div class="proj-title">GIDS Biomedical Data Science Hackathon <span class="role">— Prize Winner</span></div>
+                <div class="exp-meta">University of Rochester · Aug 2025</div>
+                <ul class="exp-bullets">
+                    <li><em>Perturb-seq gene expression prediction:</em> developed an enhanced Norman-method pipeline for single/double perturbation prediction using robust preprocessing, multi-model regression, and adaptive coefficient estimation; achieved RMSD 0.40 on the test set.</li>
+                </ul>
+            </div>
+            <div class="proj-item">
+                <div class="proj-title">GIDS Biomedical Data Science Hackathon <span class="role">— Prize Winner</span></div>
+                <div class="exp-meta">University of Rochester · Aug 2024</div>
+                <ul class="exp-bullets">
+                    <li><em>Single-cell multiome modeling:</em> built an MLP-based peak-to-gene prediction pipeline, achieving 75% accuracy and outperforming baseline linear and random-forest models.</li>
+                </ul>
+            </div>
+            <div class="proj-item">
+                <div class="proj-title">Finnov8 Hackathon <span class="role">— Second Best Overall Award</span></div>
+                <div class="exp-meta">Mar 2024</div>
+                <ul class="exp-bullets">
+                    <li>Achieved an individual score of 0.67 in a 4-member team and improved prediction from 0.60 to 0.67 using feature engineering, Multi-Output MLP, and LSTM models.</li>
                 </ul>
             </div>
         </div>
