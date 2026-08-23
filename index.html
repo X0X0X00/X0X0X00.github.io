@@ -71,10 +71,9 @@
         .exp-bullets li { margin-bottom: 6px; padding-left: 15px; position: relative; }
         .exp-bullets li::before { content: "▸"; position: absolute; left: 0; color: #1e6bb8; }
 
-        /* Projects & awards */
-        .proj-item { margin-bottom: 16px; }
-        .proj-title { font-size: 15px; font-weight: 500; color: #000; line-height: 1.4; }
-        .proj-title .role { font-weight: 400; color: #666; }
+        /* Aligned rows (education, awards) */
+        .row { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; }
+        .row .right { color: #707070; font-size: 13px; white-space: nowrap; flex-shrink: 0; }
 
         /* Education */
         .edu-item { margin-bottom: 14px; font-size: 14px; }
@@ -83,11 +82,16 @@
         .edu-item .meta { font-size: 13px; color: #707070; }
 
         /* Awards */
+        .awards { font-size: 14px; }
+        .award-item { margin-bottom: 6px; }
+        .award-item .name { color: #333; }
 
         .footer { font-size: 12px; color: #767676; margin-top: 40px; padding-top: 15px; border-top: 1px solid #f0f0f0; }
 
         @media (max-width: 768px) {
             .header { flex-direction: column; align-items: center; text-align: center; }
+            .row { flex-direction: column; gap: 0; }
+            .row .right { white-space: normal; }
         }
     </style>
 </head>
@@ -200,48 +204,24 @@
         <div class="section">
             <h2>Education</h2>
             <div class="edu-item">
-                <div class="school">Columbia University</div>
-                <div class="degree">M.S. in Artificial Intelligence · Concentration: AI and Advanced Computing</div>
-                <div class="meta">Aug 2026 – Dec 2028 (expected) · New York, NY</div>
+                <div class="row"><span class="school">Columbia University</span><span class="right">New York, NY</span></div>
+                <div class="row"><span class="degree">M.S. in Artificial Intelligence · Concentration: AI and Advanced Computing</span><span class="right">Aug 2026 – Dec 2028 (expected)</span></div>
             </div>
             <div class="edu-item">
-                <div class="school">University of Rochester</div>
-                <div class="degree">B.S. in Computer Science — Cum Laude, Highest Distinction in Computer Science</div>
-                <div class="degree">B.S. in Business: Information Systems — Cum Laude</div>
-                <div class="meta">Aug 2022 – Dec 2025 · GPA 3.85/4.00 · Dean's List (2023–2025)</div>
+                <div class="row"><span class="school">University of Rochester</span><span class="right">Rochester, NY</span></div>
+                <div class="row"><span class="degree">B.S. in Computer Science — Cum Laude, Highest Distinction in Computer Science</span><span class="right">Aug 2022 – Dec 2025</span></div>
+                <div class="row"><span class="degree">B.S. in Business: Information Systems — Cum Laude</span></div>
+                <div class="meta">GPA 3.85/4.00 · Dean's List (2023–2025)</div>
             </div>
         </div>
 
         <div class="section">
-            <h2>Selected Projects &amp; Awards</h2>
-
-            <div class="proj-item">
-                <div class="proj-title">GIDS Biomedical Data Science Hackathon <span class="role">— Prize Winner</span></div>
-                <div class="exp-meta">University of Rochester · Aug 2026</div>
-                <ul class="exp-bullets">
-                    <li><em>MERFISH cell-type classification:</em> led the modeling pipeline for 60-class cell-type prediction on mouse spinal-cord data (200 genes, 5K labelled cells): seed-bagged LightGBM ensembles over expression, PCA, and spatial/expression-neighbour label features with biological constraint masks and a leakage-free CV protocol; placed <strong>3rd of 30 teams</strong> with 80.7% accuracy (majority-class baseline 14%).</li>
-                </ul>
-            </div>
-            <div class="proj-item">
-                <div class="proj-title">GIDS Biomedical Data Science Hackathon <span class="role">— Prize Winner</span></div>
-                <div class="exp-meta">University of Rochester · Aug 2025</div>
-                <ul class="exp-bullets">
-                    <li><em>Perturb-seq gene expression prediction:</em> developed an enhanced Norman-method pipeline for single/double perturbation prediction using robust preprocessing, multi-model regression, and adaptive coefficient estimation; achieved RMSD 0.40 on the test set.</li>
-                </ul>
-            </div>
-            <div class="proj-item">
-                <div class="proj-title">GIDS Biomedical Data Science Hackathon <span class="role">— Prize Winner</span></div>
-                <div class="exp-meta">University of Rochester · Aug 2024</div>
-                <ul class="exp-bullets">
-                    <li><em>Single-cell multiome modeling:</em> built an MLP-based peak-to-gene prediction pipeline, achieving 75% accuracy and outperforming baseline linear and random-forest models.</li>
-                </ul>
-            </div>
-            <div class="proj-item">
-                <div class="proj-title">Finnov8 Hackathon <span class="role">— Second Best Overall Award</span></div>
-                <div class="exp-meta">Mar 2024</div>
-                <ul class="exp-bullets">
-                    <li>Achieved an individual score of 0.67 in a 4-member team and improved prediction from 0.60 to 0.67 using feature engineering, Multi-Output MLP, and LSTM models.</li>
-                </ul>
+            <h2>Awards</h2>
+            <div class="awards">
+                <div class="row award-item"><span class="name">GIDS Biomedical Data Science Hackathon — Prize Winner</span><span class="right">Aug 2026</span></div>
+                <div class="row award-item"><span class="name">GIDS Biomedical Data Science Hackathon — Prize Winner</span><span class="right">Aug 2025</span></div>
+                <div class="row award-item"><span class="name">GIDS Biomedical Data Science Hackathon — Prize Winner</span><span class="right">Aug 2024</span></div>
+                <div class="row award-item"><span class="name">Finnov8 Hackathon — Second Best Overall Award</span><span class="right">Mar 2024</span></div>
             </div>
         </div>
 
