@@ -2,7 +2,9 @@
 
 Live at https://x0x0x00.github.io/ · CV: https://x0x0x00.github.io/cv.pdf
 
-- `index.html` — the single-page site.
+- `index.html` — the single-page site (no build step; supports light/dark mode via `prefers-color-scheme`,
+  each research entry's contribution bullets are collapsed behind a "Contributions" toggle).
+- `images/` — `photo.jpg` (also used as the link-preview image), `favicon.svg`, `apple-touch-icon.png`.
 - `cv.pdf` — **auto-generated**: the deploy workflow (`.github/workflows/deploy.yml`) compiles
   `Zhenhao_cv_EN.tex` from [X0X0X00/Resume](https://github.com/X0X0X00/Resume) with tectonic on every
   push here, hourly (when the resume repo changed), and on manual "Run workflow". The copy committed
