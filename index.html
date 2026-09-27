@@ -121,7 +121,7 @@
                 Zhejiang University — first on agent memory, and since 2026 on computer-use agents.
 
                 <p style="margin-top: 10px;">
-                My research focuses on AI agents that act in interactive environments. I build multimodal benchmarks and training environments
+                My research focuses on AI agents that act in interactive environments. I build large-scale multimodal datasets and training environments
                 for computer-use agents with executable, browser-verified rewards; train unified vision-language agents with SFT and
                 reinforcement learning (GRPO); design reward models for long-horizon agent evaluation; and study memory and context management
                 in multi-turn LLM agents. I am broadly interested in AI agents, multimodal learning, and reinforcement learning.
@@ -133,14 +133,16 @@
             <h2>Research</h2>
 
             <div class="publication-item">
-                <div class="pub-title">Computer-Use CAPTCHA Agents: An Interactive Multimodal Benchmark and Training Environment</div>
-                <div class="pub-venue">Ongoing project</div><div class="pub-links"><a href="https://github.com/X0X0X00/CaptchaArena" aria-label="Project: Computer-Use CAPTCHA Agents">[Project]</a> <a href="https://huggingface.co/datasets/ZHEN-04/CaptchaArena" aria-label="Benchmark: CaptchaArena on Hugging Face">[Benchmark]</a></div>
-                <div class="exp-meta">Lead Researcher · Zhejiang University, College of Computer Science and Technology · Advisor: <a href="https://ffmpbgrnn.github.io/">Dr. Linchao Zhu</a> · Jan 2026 – Present</div>
+                <div class="pub-title">CaptchaArena: A Large-Scale, Fine-Grained Dataset for Training Computer-Use Agents on Interactive CAPTCHAs</div>
+                <div class="pub-authors"><strong>Zhenhao Zhang</strong>*, Zhaoyu Fan, Haohan Ying, Jingwen Hu, Hancen Fan, Junhao Zhou, Zitian Chen, Linchao Zhu&dagger; &nbsp;(*Project lead, &dagger;Corresponding author)</div>
+                <div class="pub-venue">arXiv 2026 · Under review</div><div class="pub-links"><a href="https://github.com/X0X0X00/CaptchaArena" aria-label="Project: CaptchaArena">[Project]</a> <a href="https://huggingface.co/datasets/ZHEN-04/CaptchaArena" aria-label="Dataset: CaptchaArena on Hugging Face">[Dataset]</a></div>
+                <div class="exp-meta">Project Lead · Zhejiang University, College of Computer Science and Technology · Advisor: <a href="https://ffmpbgrnn.github.io/">Dr. Linchao Zhu</a> · Jan 2026 – Present</div>
                 <ul class="exp-bullets">
-                    <li>Led a research team in developing an interactive multimodal benchmark and training environment for computer-use agents, covering 50K CAPTCHA instances across 20 task categories and 5 interaction patterns, with low-level mouse/keyboard actions and executable, browser-verified ground truth.</li>
-                    <li>Designed an answer-conditioned reasoning distillation pipeline for 46K multi-turn trajectories, integrating per-step chain-of-thought supervision, symbol-to-pixel grounding, persistent PLAN/STATE memory, and independent VLM-based quality filtering.</li>
-                    <li>Trained a unified Qwen3.5-9B multimodal agent across all 20 task categories, constructing a 37K+ per-turn SFT corpus and experimenting with LoRA, full-parameter fine-tuning, frozen vision encoders, 32K contexts, and multi-task data scheduling.</li>
-                    <li>Engineered large-scale multimodal SFT and GRPO training infrastructure with DeepSpeed ZeRO-3, Liger FLCE, distributed checkpointing, executable environment rewards, and custom memory optimizations for long-context training with a 248K-token vocabulary.</li>
+                    <li>Led an 8-person team to build CaptchaArena, the first large-scale, fine-grained training dataset for interactive CAPTCHA solving: 50K puzzles across 20 types and 5 interaction modes (single-click, multi-click, arrow-cycle, real-time, text-entry), each with an executable reference solution replayed in a real browser and accepted by the environment verifier, plus pixel-mask grading for irregular targets.</li>
+                    <li>Built a reasoning-annotation pipeline that turns 50K verified screenshot–action trajectories into 46K step-by-step reasoning-annotated trajectories, using a teacher model, a cross-family VLM judge (consistency, no hindsight, decisiveness), feedback-driven regeneration, and stronger-model verification.</li>
+                    <li>Trained CaptchaAgent, a single Qwen3.5-9B policy for all 20 types: supervised fine-tuning on 37.6K per-turn samples raises Pass@1 from 11.4 to 70.5, and GRPO with the environment verifier as reward (no reward model or human labels) raises it to 71.7 — above the strongest open-weight GUI agent (35.2) and closed-source model (69.2); humans reach 94.1.</li>
+                    <li>RL also improves transfer to external benchmarks (Open CaptchaWorld 47.2 → 51.0, Halligan 13.6 → 20.0); conducted per-type error analysis showing remaining failures concentrate in non-submission, weak grounding, and unstable execution.</li>
+                    <li>Engineered the multimodal SFT and GRPO training infrastructure with DeepSpeed ZeRO-3, Liger FLCE, distributed checkpointing, and live-environment rewards for long-context training.</li>
                 </ul>
             </div>
 
@@ -215,7 +217,7 @@
             </div>
         </div>
 
-        <div class="footer">Last updated: August 2026</div>
+        <div class="footer">Last updated: September 2026</div>
     </div>
 
 </body>
