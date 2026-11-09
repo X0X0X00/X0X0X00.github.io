@@ -59,19 +59,43 @@ jobs:
           fi
           echo "$sha" > cv.sha
 
-      - name: Install tectonic
+      - name: Restore cached tectonic
         if: steps.check.outputs.changed == 'true'
+        id: tectonic-cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.local/bin/tectonic
+          key: tectonic-${{ env.TECTONIC_VERSION }}-x86_64-unknown-linux-musl
+
+      - name: Install tectonic
+        # GitHub release downloads occasionally return 5xx for a few minutes: retry with
+        # backoff, and let the CV step fall back to the published PDF if it still fails.
+        if: steps.check.outputs.changed == 'true' && steps.tectonic-cache.outputs.cache-hit != 'true'
+        continue-on-error: true
         run: |
-          curl -fsSL "https://github.com/tectonic-typesetting/tectonic/releases/download/tectonic%40${TECTONIC_VERSION}/tectonic-${TECTONIC_VERSION}-x86_64-unknown-linux-musl.tar.gz" | tar xz
-          sudo mv tectonic /usr/local/bin/tectonic
-          tectonic --version
+          url="https://github.com/tectonic-typesetting/tectonic/releases/download/tectonic%40${TECTONIC_VERSION}/tectonic-${TECTONIC_VERSION}-x86_64-unknown-linux-musl.tar.gz"
+          curl -fSL --retry 10 --retry-delay 20 --retry-all-errors -o "$RUNNER_TEMP/tectonic.tar.gz" "$url"
+          mkdir -p ~/.local/bin
+          tar xzf "$RUNNER_TEMP/tectonic.tar.gz" -C ~/.local/bin tectonic
+          ~/.local/bin/tectonic --version
 
       - name: Compile CV
         if: steps.check.outputs.changed == 'true'
         run: |
-          mkdir -p out
-          tectonic -o out "resume/${RESUME_TEX}"
-          cp "out/${RESUME_TEX%.tex}.pdf" cv.pdf
+          if [ -x ~/.local/bin/tectonic ]; then
+            mkdir -p out
+            ~/.local/bin/tectonic -o out "resume/${RESUME_TEX}"
+            cp "out/${RESUME_TEX%.tex}.pdf" cv.pdf
+          elif curl -fsSL -o cv.live.pdf "$SITE_URL/cv.pdf"; then
+            # Keep the currently published CV and its cv.sha, so the hourly run recompiles
+            # as soon as tectonic can be downloaded again.
+            echo "::warning::tectonic unavailable; keeping the currently published cv.pdf"
+            mv cv.live.pdf cv.pdf
+            curl -fsSL -o cv.sha "$SITE_URL/cv.sha" || echo none > cv.sha
+          else
+            echo "::warning::tectonic unavailable and no published CV; using the committed cv.pdf"
+            echo none > cv.sha
+          fi
           ls -l cv.pdf
 
       - name: Assemble site

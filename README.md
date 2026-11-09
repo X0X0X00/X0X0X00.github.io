@@ -7,8 +7,9 @@ Live at https://x0x0x00.github.io/ · CV: https://x0x0x00.github.io/cv.pdf
 - `images/` — `photo.jpg` (also used as the link-preview image), `favicon.svg`, `apple-touch-icon.png`.
 - `cv.pdf` — **auto-generated**: the deploy workflow (`.github/workflows/deploy.yml`) compiles
   `Zhenhao_cv_EN.tex` from [X0X0X00/Resume](https://github.com/X0X0X00/Resume) with tectonic on every
-  push here, hourly (when the resume repo changed), and on manual "Run workflow". The copy committed
-  here is just a fallback.
+  push here, hourly (when the resume repo changed), and on manual "Run workflow". If the tectonic download
+  is unavailable, the deploy keeps the currently published CV instead of failing; the copy committed here is the
+  last-resort fallback.
 
 To update the CV: edit in Overleaf → **Menu → GitHub → Push Overleaf changes to GitHub**. The site picks it
 up within an hour, or run the workflow manually for an immediate rebuild.
